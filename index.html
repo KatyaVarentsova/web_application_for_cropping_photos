@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <script src="./script.js" defer></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="image-container">
+                <img id="image" />
+            </div>
+            <div class="preview-container">
+                <img id="preview-image" />
+            </div>
+        </div>
+        <input type="file" id="file" accept="image/*">
+        <label for="file">Выберите фотографию</label>
+        <div class="options hide">
+            <input type="number" id="height-input" placeholder="Введите высоту" max="780" />
+            <input type="number" id="width-input" placeholder="Введите ширину" max="780" />
+            <button class="aspect-ratio-button">16:9</button>
+            <button class="aspect-ratio-button">4:3</button>
+            <button class="aspect-ratio-button">1:1</button>
+            <button class="aspect-ratio-button">2:3</button>
+            <button class="aspect-ratio-button">Free</button>
+        </div>
+        <div class="btns">
+            <button id="preview" class="hide">Предварительный просмотр</button>
+            <a href="" id="download" class="hide">Скачать</a>
+        </div>
+    </div>
+</body>
+
+</html>
