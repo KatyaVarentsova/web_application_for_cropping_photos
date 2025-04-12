@@ -11,24 +11,36 @@ let cropper = "";
 let fileName = "";
 
 fileInput.onchange = () => {
-    previewImage.src = "";
-    heightInput.value = 0;
-    widthInput.value = 0;
-    downloadButton.classList.add("hide");
+    fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
 
-    let reader = new FileReader();
-    reader.readAsDataURL(fileInput.files[0]);
-    reader.onload = () => {
-        image.setAttribute("src", reader.result);
-        if (cropper) {
-            cropper.destroy();
+        if (file) {
+            const maxSize = 300 * 1024;
+
+            if (file.size > maxSize) {
+                alert('Файл слишком большой. Максимум 300 КБ.');
+            } else {
+                previewImage.src = "";
+                heightInput.value = 0;
+                widthInput.value = 0;
+                downloadButton.classList.add("hide");
+
+                let reader = new FileReader();
+                reader.readAsDataURL(fileInput.files[0]);
+                reader.onload = () => {
+                    image.setAttribute("src", reader.result);
+                    if (cropper) {
+                        cropper.destroy();
+                    }
+                    cropper = new Cropper(image);
+                    options.classList.remove("hide");
+                    previewButton.classList.remove("hide");
+                };
+                fileName = fileInput.files[0].name.split(".")[0];
+            }
         }
-        cropper = new Cropper(image);
-        options.classList.remove("hide");
-        previewButton.classList.remove("hide");
-    };
-    fileName = fileInput.files[0].name.split(".")[0];
-};
+    })
+}
 
 aspectRatio.forEach((element) => {
     element.addEventListener("click", () => {
@@ -63,7 +75,7 @@ previewButton.addEventListener("click", (e) => {
     previewImage.src = imgSrc;
     downloadButton.download = `cropped_${fileName}.png`;
     downloadButton.setAttribute("href", imgSrc);
-  });
+});
 
 window.onload = () => {
     download.classList.add("hide");
